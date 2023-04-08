@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/constant/app_colors.dart';
 import 'package:todo_app/constant/const_sizebox.dart';
+
+import '../../../../constant/app_text_field.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
@@ -15,22 +18,54 @@ class LoginPage extends StatelessWidget {
           padding: EdgeInsets.symmetric(
               horizontal: size.width * 0.08, vertical: size.height * 0.02),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              constHightSizedBox(0.14, size.height),
-              const Text(
-                "Welcome",
+              constHightSizedBox(0.16, size.height),
+              Text(
+                "TO-DO",
                 style: TextStyle(
-                  fontSize: 44,
                   fontWeight: FontWeight.bold,
+                  fontSize: 44,
+                  color: AppColors.blackColor,
                 ),
               ),
-              constHightSizedBox(0.12, size.height),
-              TextField(
-                decoration: myInputDecoration(hintText: "Mobile Number"),
+              RichText(
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                      text: "Welcome\n",
+                      style: TextStyle(
+                          fontSize: 38,
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.blackColor),
+                    ),
+                    TextSpan(
+                      text:
+                          "With our app, you can easily manage your tasks and stay organized throughout the day. Whether you have a long to-do list or just a few important tasks to complete, our app is designed to help you stay on top of your goals and get things done.",
+                      style: TextStyle(
+                        color: AppColors.greyTextColor,
+                        fontSize: 14,
+                        fontStyle: FontStyle.italic,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              constHightSizedBox(0.04, size.height),
+              AppTextField(
+                hintText: "Mobile Number",
+                obscureText: false,
+                textEditingController: phoneTextEditingController,
+                suffixIcon: const Icon(Icons.close),
+                onValidate: () {},
               ),
               constHightSizedBox(0.02, size.height),
-              TextField(
-                decoration: myInputDecoration(hintText: "Password"),
+              AppTextField(
+                hintText: "Password",
+                obscureText: true,
+                textEditingController: passwordTextEditingController,
+                suffixIcon: const Icon(Icons.remove_red_eye),
+                onValidate: () {},
               ),
               constHightSizedBox(0.06, size.height),
               GestureDetector(
@@ -92,22 +127,4 @@ class LoginPage extends StatelessWidget {
       ),
     );
   }
-}
-
-InputDecoration myInputDecoration({required String hintText}) {
-  return InputDecoration(
-    border: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(12),
-      borderSide: const BorderSide(
-        color: Colors.black,
-        width: 2,
-      ),
-    ),
-    hintText: hintText,
-    hintStyle: TextStyle(
-      fontWeight: FontWeight.w500,
-      fontSize: 20,
-      color: Colors.grey.shade500,
-    ),
-  );
 }
