@@ -5,3 +5,9 @@ SizedBox constHightSizedBox(double d, double size) {
     height: size * d,
   );
 }
+
+SizedBox constWidthSizedBox(double d, double size) {
+  return SizedBox(
+    width: size * d,
+  );
+}

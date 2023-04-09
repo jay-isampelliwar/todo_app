@@ -4,15 +4,19 @@ import 'app_colors.dart';
 
 class AppTextField extends StatelessWidget {
   String hintText;
-  Icon? suffixIcon;
-  Function()? onValidate;
+  Widget suffixIcon;
+  Function()? onSuffix;
+  String? Function(String?)? validator;
   bool obscureText;
   TextEditingController? textEditingController;
+  TextInputType inputType;
 
   AppTextField(
       {required this.hintText,
-      this.suffixIcon,
-      this.onValidate,
+      this.suffixIcon = const SizedBox(),
+      this.validator,
+      this.onSuffix,
+      required this.inputType,
       required this.obscureText,
       required this.textEditingController,
       Key? key})
@@ -24,9 +28,8 @@ class AppTextField extends StatelessWidget {
       obscureText: obscureText,
       style: TextStyle(color: AppColors.blackColor),
       controller: textEditingController,
-      validator: (value) {
-        return null;
-      },
+      validator: validator,
+      keyboardType: inputType,
       decoration: InputDecoration(
         contentPadding:
             const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
@@ -53,6 +56,11 @@ class AppTextField extends StatelessWidget {
             width: 2,
           ),
         ),
+        suffixIcon: IconButton(
+          onPressed: onSuffix,
+          icon: suffixIcon,
+        ),
+        suffixIconColor: AppColors.blackColor,
       ),
       cursorColor: AppColors.blackColor,
     );
