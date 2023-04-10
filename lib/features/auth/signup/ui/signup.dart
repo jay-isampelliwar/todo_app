@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_app/features/auth/login/ui/login.dart';
 import 'package:todo_app/features/auth/signup/bloc/sign_up_bloc.dart';
-import 'package:todo_app/main.dart';
-import 'package:todo_app/util/constant/const_sizebox.dart';
 
-import '../../../../util/constant/app_colors.dart';
-import '../../../../util/constant/app_text_field.dart';
-import '../../../../util/helper/app_validator.dart';
-import '../../../widgets/todo_label.dart';
+import '../../../../core/constant/app_colors.dart';
+import '../../../../core/constant/const_sizeBox.dart';
+import '../../../../core/constant/app_text_field.dart';
+import '../../../../core/helper/app_validator.dart';
+import '../../../home/ui/home.dart';
+import '../../widgets/todo_label.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -49,7 +49,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 listener: (context, state) {
                   switch (state.runtimeType) {
                     case SignUpLoginNavigatorActionState:
-                      Navigator.push(context,
+                      Navigator.pushReplacement(context,
                           MaterialPageRoute(builder: (context) => LoginPage()));
                       break;
                     case SignUpHomePageNavigatorActionState:

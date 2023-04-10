@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../util/constant/app_colors.dart';
-import '../../util/constant/const_sizeBox.dart';
+import '../../../core/constant/app_colors.dart';
+import '../../../core/constant/const_sizeBox.dart';
 
 class TodoLabel extends StatelessWidget {
   const TodoLabel({

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_app/features/auth/signup/ui/signup.dart';
-import 'package:todo_app/main.dart';
-import 'package:todo_app/util/constant/app_colors.dart';
-import 'package:todo_app/util/constant/const_sizebox.dart';
-import 'package:todo_app/util/helper/app_validator.dart';
+import 'package:todo_app/core/constant/app_colors.dart';
+import 'package:todo_app/core/helper/app_validator.dart';
 
-import '../../../../util/constant/app_text_field.dart';
-import '../../../widgets/todo_label.dart';
+import '../../../../core/constant/app_text_field.dart';
+import '../../../../core/constant/const_sizeBox.dart';
+
+import '../../../home/ui/home.dart';
+import '../../widgets/todo_label.dart';
 import '../bloc/login_bloc.dart';
 
 class LoginPage extends StatelessWidget {
@@ -42,7 +43,7 @@ class LoginPage extends StatelessWidget {
                         MaterialPageRoute(
                             builder: (context) => const HomePage()));
                   } else if (state is LoginSignUpNavigateActionState) {
-                    Navigator.push(
+                    Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
                             builder: (context) => const SignUpPage()));
