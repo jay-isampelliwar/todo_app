@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/core/constant/app_colors.dart';
 import 'package:todo_app/core/constant/const_sizeBox.dart';
+import 'package:todo_app/features/todo/ui/todo.dart';
 
 import '../../../core/constant/app_font_styles.dart';
 
@@ -34,14 +35,11 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       drawer: const Drawer(),
-      body: Padding(
-        padding: EdgeInsets.only(
-          right: size.width * 0.06,
-          left: size.width * 0.06,
-          bottom: size.height * 0.03,
-          top: size.height * 0.02,
-        ),
-        child: SingleChildScrollView(
+      body: SingleChildScrollView(
+        child: Container(
+          padding: EdgeInsets.symmetric(
+            horizontal: size.width * 0.04,
+          ),
           child: Column(
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -97,7 +95,11 @@ class _HomePageState extends State<HomePage> {
         padding: EdgeInsets.only(
             right: size.width * 0.03, bottom: size.height * 0.04),
         child: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            //! Navigate to Taskpage
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => TodoPage()));
+          },
           child: const Text("+"),
         ),
       ),
@@ -153,7 +155,13 @@ class _TaskCardState extends State<TaskCard> {
                     width: 4,
                   ),
                 ),
-                child: flag ? const Icon(Icons.done) : const SizedBox(),
+                child: flag
+                    ? Image.asset(
+                        'lib/assets/done.png',
+                        fit: BoxFit.cover,
+                        color: Colors.green,
+                      )
+                    : const SizedBox(),
               ),
             ),
             constWidthSizedBox(0.06, size.width),
