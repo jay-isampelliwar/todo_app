@@ -17,13 +17,17 @@ class TodoLabel extends StatelessWidget {
           children: [
             SizedBox(
               height: 200,
-              child: Center(child: Image.asset("lib/assets/todo.png")),
+              child: Center(
+                  child: SizedBox(
+                      height: size.height * 0.4,
+                      width: size.width * 0.5,
+                      child: Image.asset("lib/assets/todo.png"))),
             ),
             constWidthSizedBox(0.04, size.width),
             Text(
               "TO\nDO",
               style: TextStyle(
-                  fontSize: (size.width + size.height / 2) * 0.1,
+                  fontSize: size.width * 0.18,
                   fontWeight: FontWeight.bold,
                   color: AppColors.blackColor),
             ),
@@ -39,7 +43,7 @@ class TodoLabel extends StatelessWidget {
               TextSpan(
                 text: "Welcome, ",
                 style: TextStyle(
-                    fontSize: 20,
+                    fontSize: size.width * 0.05,
                     fontWeight: FontWeight.bold,
                     color: AppColors.blackColor),
               ),
@@ -48,7 +52,7 @@ class TodoLabel extends StatelessWidget {
                     "With our app, you can easily manage your tasks and stay organized throughout the day. Whether you have a long to-do list or just a few important tasks to complete, our app is designed to help you stay on top of your goals and get things done.",
                 style: TextStyle(
                   color: AppColors.greyTextColor,
-                  fontSize: 14,
+                  fontSize: size.width * 0.035,
                 ),
               ),
             ],
