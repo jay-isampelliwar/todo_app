@@ -16,6 +16,7 @@ class LoginPage extends StatelessWidget {
   TextEditingController phoneTextEditingController = TextEditingController();
   TextEditingController passwordTextEditingController = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  FocusNode focusNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +39,7 @@ class LoginPage extends StatelessWidget {
                 buildWhen: (previous, current) => current is! LoginActionState,
                 listener: (context, state) {
                   if (state is LoginButtonClickedActionState) {
-                    Navigator.push(
+                    Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
                             builder: (context) => const HomePage()));
@@ -88,10 +89,9 @@ class LoginPage extends StatelessWidget {
                         GestureDetector(
                           onTap: () {
                             // print(formKey.currentState!.validate());
-                            if (formKey.currentState!.validate()) {
-                              loginBloc
-                                  .add(LoginLoginButtonClickedActionEvent());
-                            }
+                            // if (formKey.currentState!.validate()) {
+                            loginBloc.add(LoginLoginButtonClickedActionEvent());
+                            // }
                           },
                           child: Container(
                             height: 60,

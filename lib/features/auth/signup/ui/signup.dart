@@ -23,6 +23,7 @@ class _SignUpPageState extends State<SignUpPage> {
   TextEditingController emailTextEditingController = TextEditingController();
   TextEditingController nameTextEditingController = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  FocusNode focusNode = FocusNode();
   bool flag = true;
 
   @override
