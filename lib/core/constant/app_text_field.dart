@@ -10,17 +10,16 @@ class AppTextField extends StatelessWidget {
   bool obscureText;
   TextEditingController? textEditingController;
   TextInputType inputType;
-
-  AppTextField(
-      {required this.hintText,
-      this.suffixIcon = const SizedBox(),
-      this.validator,
-      this.onSuffix,
-      required this.inputType,
-      required this.obscureText,
-      required this.textEditingController,
-      Key? key})
-      : super(key: key);
+  AppTextField({
+    required this.hintText,
+    this.suffixIcon = const SizedBox(),
+    this.validator,
+    this.onSuffix,
+    required this.inputType,
+    required this.obscureText,
+    required this.textEditingController,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

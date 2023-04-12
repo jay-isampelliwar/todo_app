@@ -68,11 +68,23 @@ class _SignUpPageState extends State<SignUpPage> {
                       children: [
                         AppTextField(
                           hintText: "Name",
+                          // focusNode: nameNode,
                           inputType: TextInputType.name,
                           obscureText: false,
                           textEditingController: nameTextEditingController,
+
                           validator: (text) =>
                               FieldValidator.nameValidator(text),
+                        ),
+                        constHightSizedBox(0.02, size.height),
+
+                        AppTextField(
+                          inputType: TextInputType.emailAddress,
+                          hintText: "Email address",
+                          obscureText: false,
+                          textEditingController: emailTextEditingController,
+                          validator: (text) =>
+                              FieldValidator.emailValidator(text),
                         ),
                         constHightSizedBox(0.02, size.height),
                         AppTextField(
@@ -82,15 +94,6 @@ class _SignUpPageState extends State<SignUpPage> {
                           textEditingController: phoneTextEditingController,
                           validator: (text) =>
                               FieldValidator.numberValidator(text),
-                        ),
-                        constHightSizedBox(0.02, size.height),
-                        AppTextField(
-                          inputType: TextInputType.emailAddress,
-                          hintText: "Email address",
-                          obscureText: false,
-                          textEditingController: emailTextEditingController,
-                          validator: (text) =>
-                              FieldValidator.emailValidator(text),
                         ),
                         constHightSizedBox(0.02, size.height),
                         AppTextField(
