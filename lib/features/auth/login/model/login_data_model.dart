@@ -4,18 +4,19 @@
 
 import 'dart:convert';
 
-BaseModel baseModelFromJson(String str) => BaseModel.fromJson(json.decode(str));
+TokenDataModel baseModelFromJson(String str) =>
+    TokenDataModel.fromJson(json.decode(str));
 
-String baseModelToJson(BaseModel data) => json.encode(data.toJson());
+String baseModelToJson(TokenDataModel data) => json.encode(data.toJson());
 
-class BaseModel {
-  BaseModel({
+class TokenDataModel {
+  TokenDataModel({
     required this.token,
   });
 
   String token;
 
-  factory BaseModel.fromJson(Map<String, dynamic> json) => BaseModel(
+  factory TokenDataModel.fromJson(Map<String, dynamic> json) => TokenDataModel(
         token: json["token"],
       );
 

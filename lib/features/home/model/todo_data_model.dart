@@ -28,47 +28,47 @@ class TodoListModel {
 class Datum {
   Datum({
     required this.id,
-    required this.userId,
-    required this.title,
-    required this.datumId,
-    required this.category,
-    required this.isDone,
-    required this.createdAt,
-    required this.updatedAt,
-    required this.v,
+    // required this.userId,
+    // required this.title,
+    // required this.datumId,
+    // required this.category,
+    // required this.isDone,
+    // required this.createdAt,
+    // required this.updatedAt,
+    // required this.v,
   });
 
   String id;
-  String userId;
-  String title;
-  String datumId;
-  String category;
-  bool isDone;
-  DateTime createdAt;
-  DateTime updatedAt;
-  int v;
+  // String userId;
+  // String title;
+  // String datumId;
+  // String category;
+  // bool isDone;
+  // DateTime createdAt;
+  // DateTime updatedAt;
+  // int v;
 
   factory Datum.fromJson(Map<String, dynamic> json) => Datum(
         id: json["_id"],
-        userId: json["user_id"],
-        title: json["title"],
-        datumId: json["id"],
-        category: json["category"],
-        isDone: json["isDone"],
-        createdAt: DateTime.parse(json["createdAt"]),
-        updatedAt: DateTime.parse(json["updatedAt"]),
-        v: json["__v"],
+        // userId: json["user_id"],
+        // title: json["title"],
+        // datumId: json["id"],
+        // category: json["category"],
+        // isDone: json["isDone"],
+        // createdAt: DateTime.parse(json["createdAt"]),
+        // updatedAt: DateTime.parse(json["updatedAt"]),
+        // v: json["__v"],
       );
 
   Map<String, dynamic> toJson() => {
         "_id": id,
-        "user_id": userId,
-        "title": title,
-        "id": datumId,
-        "category": category,
-        "isDone": isDone,
-        "createdAt": createdAt.toIso8601String(),
-        "updatedAt": updatedAt.toIso8601String(),
-        "__v": v,
+        // "user_id": userId,
+        // "title": title,
+        // "id": datumId,
+        // "category": category,
+        // "isDone": isDone,
+        // "createdAt": createdAt.toIso8601String(),
+        // "updatedAt": updatedAt.toIso8601String(),
+        // "__v": v,
       };
 }
