@@ -1,6 +1,6 @@
 import 'package:todo_app/features/auth/login/model/login_data_model.dart';
-import 'package:todo_app/features/model/base_model.dart';
 
+import '../../../core/model/base_data_model.dart';
 import 'api_provider.dart';
 
 class ApiRepository {
@@ -10,7 +10,7 @@ class ApiRepository {
     return _apiProvider.userRegister(name, email, phone, password);
   }
 
-  Future<TokenDataModel> userLogin(String phone, password) {
+  Future<LoginDataModel> userLogin(String phone, password) {
     return _apiProvider.userLogin(phone, password);
   }
 

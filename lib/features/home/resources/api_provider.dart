@@ -7,30 +7,30 @@ class HomeApiProvider {
 
   //get all task
 
-  Future<TodoListModel> getAllTask() async {
+  Future<TodoDataModel> getAllTask() async {
     var uri = Uri.parse("$baseUrl/tasks");
     try {} catch (e) {}
-    return TodoListModel(data: [Datum(id: "dd")]);
+    return TodoDataModel(data: [Datum(id: "dd")], status: false);
   }
 
   // get business task
-  Future<TodoListModel> getBusiness() async {
+  Future<TodoDataModel> getBusiness() async {
     var uri = Uri.parse("$baseUrl/tasks");
     try {} catch (e) {}
-    return TodoListModel(data: [Datum(id: "dd")]);
+    return TodoDataModel(data: [Datum(id: "dd")], status: false);
   }
 
   // get personal task
-  Future<TodoListModel> getPersonal() async {
+  Future<TodoDataModel> getPersonal() async {
     var uri = Uri.parse("$baseUrl/tasks");
     try {} catch (e) {}
-    return TodoListModel(data: [Datum(id: "dd")]);
+    return TodoDataModel(data: [Datum(id: "dd")], status: false);
   }
 
   // get urgent task
-  Future<TodoListModel> getUrgent() async {
+  Future<TodoDataModel> getUrgent() async {
     var uri = Uri.parse("$baseUrl/tasks");
     try {} catch (e) {}
-    return TodoListModel(data: [Datum(id: "dd")]);
+    return TodoDataModel(data: [Datum(id: "dd")], status: false);
   }
 }
