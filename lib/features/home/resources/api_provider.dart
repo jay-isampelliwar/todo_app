@@ -39,20 +39,20 @@ class HomeApiProvider {
   Future<BaseModel> createTodo(String title) async {
     var uri = Uri.parse("$baseUrl/tasks");
     try {} catch (e) {}
-    return BaseModel(message: "message");
+    return BaseModel(message: "message", status: false);
   }
 
   //update
   Future<BaseModel> updateTodo(String title) async {
     var uri = Uri.parse("$baseUrl/tasks");
     try {} catch (e) {}
-    return BaseModel(message: "message");
+    return BaseModel(message: "message", status: false);
   }
 
   //delete
   Future<BaseModel> deleteTodo() async {
     var uri = Uri.parse("$baseUrl/tasks");
     try {} catch (e) {}
-    return BaseModel(message: "message");
+    return BaseModel(message: "message", status: false);
   }
 }
