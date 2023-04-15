@@ -1,26 +1,30 @@
 // To parse this JSON data, do
 //
-//     final todoListModel = todoListModelFromJson(jsonString);
+//     final todoDataModel = todoDataModelFromJson(jsonString);
 
 import 'dart:convert';
 
-TodoListModel todoListModelFromJson(String str) =>
-    TodoListModel.fromJson(json.decode(str));
+TodoDataModel todoDataModelFromJson(String str) =>
+    TodoDataModel.fromJson(json.decode(str));
 
-String todoListModelToJson(TodoListModel data) => json.encode(data.toJson());
+String todoDataModelToJson(TodoDataModel data) => json.encode(data.toJson());
 
-class TodoListModel {
-  TodoListModel({
+class TodoDataModel {
+  TodoDataModel({
+    required this.status,
     required this.data,
   });
 
+  bool status;
   List<Datum> data;
 
-  factory TodoListModel.fromJson(Map<String, dynamic> json) => TodoListModel(
+  factory TodoDataModel.fromJson(Map<String, dynamic> json) => TodoDataModel(
+        status: json["status"],
         data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
+        "status": status,
         "data": List<dynamic>.from(data.map((x) => x.toJson())),
       };
 }
