@@ -35,7 +35,6 @@ class Datum {
     // required this.userId,
     // required this.title,
     // required this.datumId,
-    // required this.category,
     // required this.isDone,
     // required this.createdAt,
     // required this.updatedAt,
@@ -46,7 +45,6 @@ class Datum {
   // String userId;
   // String title;
   // String datumId;
-  // String category;
   // bool isDone;
   // DateTime createdAt;
   // DateTime updatedAt;
@@ -57,7 +55,6 @@ class Datum {
         // userId: json["user_id"],
         // title: json["title"],
         // datumId: json["id"],
-        // category: json["category"],
         // isDone: json["isDone"],
         // createdAt: DateTime.parse(json["createdAt"]),
         // updatedAt: DateTime.parse(json["updatedAt"]),
@@ -69,7 +66,6 @@ class Datum {
         // "user_id": userId,
         // "title": title,
         // "id": datumId,
-        // "category": category,
         // "isDone": isDone,
         // "createdAt": createdAt.toIso8601String(),
         // "updatedAt": updatedAt.toIso8601String(),

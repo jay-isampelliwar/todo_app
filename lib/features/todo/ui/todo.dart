@@ -72,50 +72,6 @@ class TodoPage extends StatelessWidget {
               },
             ),
           ),
-          constHightSizedBox(0.02, size.height),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              DateTimeWidget(
-                icon: Icon(
-                  Icons.calendar_month_rounded,
-                  color: AppColors.greyTextColor,
-                ),
-                text: "Today",
-              ),
-              DateTimeWidget(
-                icon: Icon(
-                  Icons.watch_later_outlined,
-                  color: AppColors.greyTextColor,
-                ),
-                text: "Time",
-              ),
-            ],
-          ),
-          constHightSizedBox(0.03, size.height),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              CategoryChip(
-                category: "Personal",
-                isSelected: false,
-                color: AppColors.personalColor,
-                onSelected: (value) {},
-              ),
-              CategoryChip(
-                category: "Urgent",
-                isSelected: true,
-                color: AppColors.urgentColor,
-                onSelected: (value) {},
-              ),
-              CategoryChip(
-                category: "Business",
-                isSelected: false,
-                color: AppColors.businessColor,
-                onSelected: (value) {},
-              ),
-            ],
-          ),
           constHightSizedBox(0.04, size.height),
           GestureDetector(
             onTap: () {},
@@ -138,77 +94,6 @@ class TodoPage extends StatelessWidget {
           ),
           constHightSizedBox(0.04, size.height),
         ]),
-      ),
-    );
-  }
-}
-
-class CategoryChip extends StatelessWidget {
-  CategoryChip({
-    required this.category,
-    required this.onSelected,
-    required this.isSelected,
-    required this.color,
-    Key? key,
-  }) : super(key: key);
-
-  String category;
-  bool isSelected;
-  Function(bool)? onSelected;
-  Color color;
-
-  @override
-  Widget build(BuildContext context) {
-    return FilterChip(
-      label: Text(category),
-      labelPadding: const EdgeInsets.symmetric(
-        horizontal: 8,
-        vertical: 4,
-      ),
-      labelStyle: AppTextStyle.text16(true),
-      selected: isSelected,
-      selectedColor: color,
-      onSelected: onSelected,
-    );
-  }
-}
-
-class DateTimeWidget extends StatelessWidget {
-  DateTimeWidget({
-    required this.icon,
-    required this.text,
-    Key? key,
-  }) : super(key: key);
-
-  Icon icon;
-  String text;
-
-  @override
-  Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    return Container(
-      height: size.height * 0.08,
-      width: size.width * 0.4,
-      padding: EdgeInsets.symmetric(horizontal: size.width * 0.08),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(
-          50,
-        ),
-        border: Border.all(
-          color: AppColors.blackColor.withOpacity(0.2),
-          width: 1,
-        ),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          icon,
-          Text(
-            text,
-            style: AppTextStyle.text20(false)
-                .copyWith(color: AppColors.greyTextColor),
-          )
-        ],
       ),
     );
   }
