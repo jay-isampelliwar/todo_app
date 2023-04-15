@@ -1,4 +1,5 @@
 import 'package:http/http.dart' as http;
+import 'package:todo_app/core/model/base_data_model.dart';
 import 'package:todo_app/features/home/model/todo_data_model.dart';
 
 class HomeApiProvider {
@@ -32,5 +33,26 @@ class HomeApiProvider {
     var uri = Uri.parse("$baseUrl/tasks");
     try {} catch (e) {}
     return TodoDataModel(data: [Datum(id: "dd")], status: false);
+  }
+
+  //create task
+  Future<BaseModel> createTodo(String title) async {
+    var uri = Uri.parse("$baseUrl/tasks");
+    try {} catch (e) {}
+    return BaseModel(message: "message");
+  }
+
+  //update
+  Future<BaseModel> updateTodo(String title) async {
+    var uri = Uri.parse("$baseUrl/tasks");
+    try {} catch (e) {}
+    return BaseModel(message: "message");
+  }
+
+  //delete
+  Future<BaseModel> deleteTodo() async {
+    var uri = Uri.parse("$baseUrl/tasks");
+    try {} catch (e) {}
+    return BaseModel(message: "message");
   }
 }
