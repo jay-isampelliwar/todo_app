@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todo_app/core/constant/app_font_styles.dart';
 import 'package:todo_app/core/wigets/app_snacbar.dart';
 import 'package:todo_app/features/auth/signup/ui/signup.dart';
 import 'package:todo_app/core/constant/app_colors.dart';
@@ -16,13 +17,18 @@ class LoginPage extends StatelessWidget {
   LoginPage({super.key});
   TextEditingController emailTextEditingController = TextEditingController();
   TextEditingController passwordTextEditingController = TextEditingController();
+  TextEditingController forgetPasswordTextEditingController =
+      TextEditingController();
+  TextEditingController forgetPasswordEmailTextEditingController =
+      TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  GlobalKey<FormState> forgetKey = GlobalKey<FormState>();
   FocusNode focusNode = FocusNode();
+  final LoginBloc loginBloc = LoginBloc();
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    final LoginBloc loginBloc = LoginBloc();
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
@@ -39,13 +45,24 @@ class LoginPage extends StatelessWidget {
                 listenWhen: (previous, current) => current is LoginActionState,
                 buildWhen: (previous, current) => current is! LoginActionState,
                 listener: (context, state) {
-                  if (state is LoginErrorState) {
+                  if (state is LoginLoadingSuccessState) {
+                    final loginLoadingSuccessState = state;
+                    ScaffoldMessenger.of(context).showSnackBar(appSnackBar(
+                        size: size,
+                        message: loginLoadingSuccessState.message,
+                        color: Colors.green));
+                  } else if (state is LoginErrorState) {
                     final loginErrorState = state;
                     ScaffoldMessenger.of(context).showSnackBar(appSnackBar(
                         size: size,
                         message: loginErrorState.message,
                         color: Colors.red));
                   } else if (state is LoginHomePageNavigateActionState) {
+                    final loginPageNavigate = state;
+                    ScaffoldMessenger.of(context).showSnackBar(appSnackBar(
+                        size: size,
+                        message: loginPageNavigate.message,
+                        color: Colors.green));
                     Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
@@ -89,9 +106,33 @@ class LoginPage extends StatelessWidget {
                               loginBloc.add(LoginPasswordShowButtonEvent());
                             }
                           },
-                          validator: (text) => null,
+                          validator: (text) =>
+                              text!.isEmpty ? "Required" : null,
                         ),
-                        constHightSizedBox(0.06, size.height),
+                        constHightSizedBox(0.01, size.height),
+                        Row(
+                          children: [
+                            const Spacer(),
+                            GestureDetector(
+                              onTap: () {
+                                showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return dialogBox(
+                                        size,
+                                        context,
+                                      );
+                                    });
+                              },
+                              child: Text(
+                                "Forget Password?",
+                                style: AppTextStyle.text16(true)
+                                    .copyWith(color: Colors.blue),
+                              ),
+                            ),
+                          ],
+                        ),
+                        constHightSizedBox(0.04, size.height),
                         GestureDetector(
                           onTap: () {
                             FocusScope.of(context).unfocus();
@@ -148,8 +189,6 @@ class LoginPage extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () {
-                      //! Navigate to sign up page
-
                       loginBloc.add(LoginSignUpNavigateActionEvent());
                     },
                     child: const Text(
@@ -162,6 +201,83 @@ class LoginPage extends StatelessWidget {
                     ),
                   ),
                 ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Dialog dialogBox(Size size, BuildContext context) {
+    return Dialog(
+      backgroundColor: Colors.transparent,
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.grey.shade200,
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+              vertical: size.height * 0.02, horizontal: size.width * 0.02),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Form(
+                key: forgetKey,
+                child: Column(
+                  children: [
+                    AppTextField(
+                      hintText: "Email",
+                      inputType: TextInputType.text,
+                      textEditingController:
+                          forgetPasswordEmailTextEditingController,
+                      obscureText: false,
+                      validator: (value) =>
+                          FieldValidator.emailValidator(value),
+                    ),
+                    constHightSizedBox(0.01, size.height),
+                    AppTextField(
+                      hintText: "New Password",
+                      inputType: TextInputType.text,
+                      textEditingController:
+                          forgetPasswordTextEditingController,
+                      obscureText: false,
+                      validator: (value) =>
+                          FieldValidator.passwordValidator(value),
+                    ),
+                  ],
+                ),
+              ),
+              constHightSizedBox(0.02, size.height),
+              GestureDetector(
+                onTap: () {
+                  FocusScope.of(context).unfocus();
+                  if (forgetKey.currentState!.validate()) {
+                    loginBloc.add(LoginForgetPasswordActionEvent(
+                        password: forgetPasswordTextEditingController.text,
+                        email: forgetPasswordEmailTextEditingController.text));
+                    Navigator.pop(context);
+                    forgetPasswordEmailTextEditingController.clear();
+                    forgetPasswordTextEditingController.clear();
+                  }
+                },
+                child: Container(
+                  height: 60,
+                  decoration: BoxDecoration(
+                    color: Colors.black87,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Align(
+                      child: Text(
+                    "Save",
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.grey.shade200,
+                    ),
+                  )),
+                ),
               ),
             ],
           ),

@@ -40,10 +40,12 @@ class ApiProvider {
   }
 
   // forget password
-  Future<BaseModel> userForgetPassword({required String email}) async {
+  Future<BaseModel> userForgetPassword(
+      {required String email, required String newPassword}) async {
     var uri = Uri.parse("$baseUrl/user/forget_password");
     try {
-      var response = await client.post(uri, body: {"email": email});
+      var response = await client
+          .post(uri, body: {"email": email, "newPassword": newPassword});
       return baseModelFromJson(response.body);
     } catch (e) {
       return BaseModel(status: false, message: e.toString());

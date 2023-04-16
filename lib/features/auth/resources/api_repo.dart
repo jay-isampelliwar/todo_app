@@ -19,8 +19,9 @@ class ApiRepository {
     return _apiProvider.userLogin(email: email, password: password);
   }
 
-  Future<BaseModel> userForgetPassword(String email) {
-    return _apiProvider.userForgetPassword(email: email);
+  Future<BaseModel> userForgetPassword(String email, String newPassword) {
+    return _apiProvider.userForgetPassword(
+        email: email, newPassword: newPassword);
   }
 
   Future<BaseModel> otpVerify(String otp, String email) {

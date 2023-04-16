@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
+import 'package:todo_app/core/model/base_data_model.dart';
 import 'package:todo_app/features/auth/login/model/login_data_model.dart';
 import 'package:todo_app/features/auth/resources/api_repo.dart';
 
@@ -18,6 +19,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     on<LoginPasswordHideButtonEvent>(loginPasswordHideButtonEvent);
     on<LoginForgetPasswordButtonClickedActionEvent>(
         loginForgetPasswordButtonClickedActionEvent);
+    on<LoginForgetPasswordActionEvent>(loginForgetPasswordActionEvent);
   }
 
   FutureOr<void> loginSignUpNavigateActionEvent(
@@ -53,4 +55,20 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   FutureOr<void> loginForgetPasswordButtonClickedActionEvent(
       LoginForgetPasswordButtonClickedActionEvent event,
       Emitter<LoginState> emit) {}
+
+  FutureOr<void> loginForgetPasswordActionEvent(
+      LoginForgetPasswordActionEvent event, Emitter<LoginState> emit) async {
+    emit(LoginLoadingScreenState());
+    BaseModel baseModel = await _apiRepository.userForgetPassword(
+      event.email,
+      event.password,
+    );
+
+    if (baseModel.status) {
+      emit(LoginLoadingSuccessState(message: baseModel.message));
+      emit(LoginInitialState());
+    } else {
+      emit(LoginErrorState(message: baseModel.message));
+    }
+  }
 }

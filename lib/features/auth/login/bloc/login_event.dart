@@ -14,6 +14,12 @@ class LoginLoginButtonClickedActionEvent extends LoginEvent {
       {required this.email, required this.password});
 }
 
+class LoginForgetPasswordActionEvent extends LoginEvent {
+  String password;
+  String email;
+  LoginForgetPasswordActionEvent({required this.password, required this.email});
+}
+
 class LoginPasswordShowButtonEvent extends LoginEvent {}
 
 class LoginPasswordHideButtonEvent extends LoginEvent {}
