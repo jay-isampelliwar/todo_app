@@ -13,7 +13,7 @@ import '../bloc/login_bloc.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
-  TextEditingController phoneTextEditingController = TextEditingController();
+  TextEditingController emailTextEditingController = TextEditingController();
   TextEditingController passwordTextEditingController = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   FocusNode focusNode = FocusNode();
@@ -38,7 +38,7 @@ class LoginPage extends StatelessWidget {
                 listenWhen: (previous, current) => current is LoginActionState,
                 buildWhen: (previous, current) => current is! LoginActionState,
                 listener: (context, state) {
-                  if (state is LoginButtonClickedActionState) {
+                  if (state is LoginHomePageNavigateActionState) {
                     Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
@@ -59,7 +59,7 @@ class LoginPage extends StatelessWidget {
                           hintText: "Mobile Number",
                           inputType: TextInputType.number,
                           obscureText: false,
-                          textEditingController: phoneTextEditingController,
+                          textEditingController: emailTextEditingController,
                           validator: (text) =>
                               FieldValidator.numberValidator(text),
                         ),
@@ -88,10 +88,12 @@ class LoginPage extends StatelessWidget {
                         constHightSizedBox(0.06, size.height),
                         GestureDetector(
                           onTap: () {
-                            // print(formKey.currentState!.validate());
-                            // if (formKey.currentState!.validate()) {
-                            loginBloc.add(LoginLoginButtonClickedActionEvent());
-                            // }
+                            if (formKey.currentState!.validate()) {
+                              loginBloc.add(LoginLoginButtonClickedActionEvent(
+                                  email: emailTextEditingController.text,
+                                  password:
+                                      passwordTextEditingController.text));
+                            }
                           },
                           child: Container(
                             height: 60,

@@ -12,9 +12,6 @@ class ApiProvider {
       required String email,
       required String phone,
       required String password}) async {
-    // var header = {
-    //   "Content-Type": "application/json",
-    // };
     var uri = Uri.parse("$baseUrl/user/register");
     var body = {
       "name": name,
