@@ -50,4 +50,17 @@ class FieldValidator {
 
     return nameRegex.hasMatch(name) ? null : "Invalid Name";
   }
+
+  static String? otpValidator(String? val) {
+    if (val!.isEmpty) return "Required";
+    if (val.length != 6) {
+      return "OTP Must be 6 Digit number";
+    }
+
+    final regex = RegExp(r'^[0-9]+$');
+    if (!regex.hasMatch(val)) {
+      return "Please Enter valid OTP";
+    }
+    return null;
+  }
 }

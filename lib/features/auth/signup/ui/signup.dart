@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_app/features/auth/login/ui/login.dart';
+import 'package:todo_app/features/auth/otp/ui/otp.dart';
 import 'package:todo_app/features/auth/signup/bloc/sign_up_bloc.dart';
 
 import '../../../../core/constant/app_colors.dart';
 import '../../../../core/constant/const_sizeBox.dart';
 import '../../../../core/constant/app_text_field.dart';
 import '../../../../core/helper/app_validator.dart';
-import '../../../home/ui/home.dart';
 import '../../widgets/todo_label.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -57,7 +57,9 @@ class _SignUpPageState extends State<SignUpPage> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const HomePage()));
+                              builder: (context) => OTPScreen(
+                                    email: emailTextEditingController.text,
+                                  )));
                       break;
                     case SignUpShowSnackBarState:
                       final signUpShowSnackBarState =
