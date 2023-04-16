@@ -17,7 +17,6 @@ class SignUpLoginButtonClickedActionEvent extends SignUpEvent {}
 
 class SignUpButtonClickedActionEvent extends SignUpEvent {
   String name;
-<<<<<<< HEAD
   String phone;
   String email;
   String password;
@@ -27,15 +26,4 @@ class SignUpButtonClickedActionEvent extends SignUpEvent {
     required this.email,
     required this.password,
   });
-=======
-  String password;
-  String email;
-  String phone;
-
-  SignUpButtonClickedActionEvent(
-      {required this.name,
-      required this.password,
-      required this.phone,
-      required this.email});
->>>>>>> 7ac6a43dbf1a9419fa88a657daf7690214d63101
 }
