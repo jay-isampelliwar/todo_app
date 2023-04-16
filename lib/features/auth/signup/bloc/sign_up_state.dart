@@ -7,21 +7,24 @@ abstract class SignUpActionState extends SignUpState {}
 
 class SignUpInitialState extends SignUpState {}
 
-class SignUpErrorState extends SignUpState {}
-
 class SignUpButtonLoadingState extends SignUpState {}
 
 class SignUpPasswordShowButtonClickedState extends SignUpState {}
 
 class SignUpPasswordHideButtonClickedState extends SignUpState {}
 
-class SignUpHomePageNavigatorActionState extends SignUpActionState {}
+class SignUpHomePageNavigatorActionState extends SignUpActionState {
+  String message;
+  SignUpHomePageNavigatorActionState({
+    required this.message,
+  });
+}
 
 class SignUpLoginNavigatorActionState extends SignUpActionState {}
 
-class SignUpShowSnackBarState extends SignUpActionState {
+class SignUpErrorState extends SignUpActionState {
   String message;
-  SignUpShowSnackBarState({
+  SignUpErrorState({
     required this.message,
   });
 }

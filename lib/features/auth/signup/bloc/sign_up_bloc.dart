@@ -19,16 +19,14 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
         signUpLoginButtonClickedActionEvent);
     on<SignUpPasswordShowButtonClickedEvent>(
         signUpPasswordShowButtonClickedEvent);
+    on<SignUpPasswordHideButtonClickedEvent>(
+        signUpPasswordHideButtonClickedEvent);
   }
 
   FutureOr<void> signUpInitialEvent(
-      SignUpInitialEvent event, Emitter<SignUpState> emit) {}
-
-  // FutureOr<void> signUpButtonClickedEvent(
-  //     SignUpButtonClickedEvent event, Emitter<SignUpState> emit) {
-  //   //!API Call
-
-  // }
+      SignUpInitialEvent event, Emitter<SignUpState> emit) {
+    emit(SignUpInitialState());
+  }
 
   FutureOr<void> signUpButtonClickedActionEvent(
       SignUpButtonClickedActionEvent event, Emitter<SignUpState> emit) async {
@@ -38,9 +36,9 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
         event.name, event.email, event.phone, event.password);
 
     if (baseModel.status == true) {
-      emit(SignUpHomePageNavigatorActionState());
+      emit(SignUpHomePageNavigatorActionState(message: baseModel.message));
     } else {
-      emit(SignUpShowSnackBarState(message: baseModel.message));
+      emit(SignUpErrorState(message: baseModel.message));
       emit(SignUpInitialState());
     }
   }
@@ -53,5 +51,10 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   FutureOr<void> signUpPasswordShowButtonClickedEvent(
       SignUpPasswordShowButtonClickedEvent event, Emitter<SignUpState> emit) {
     emit(SignUpPasswordShowButtonClickedState());
+  }
+
+  FutureOr<void> signUpPasswordHideButtonClickedEvent(
+      SignUpPasswordHideButtonClickedEvent event, Emitter<SignUpState> emit) {
+    emit(SignUpPasswordHideButtonClickedState());
   }
 }
