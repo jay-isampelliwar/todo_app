@@ -3,13 +3,13 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:todo_app/core/model/base_data_model.dart';
-import 'package:todo_app/features/auth/resources/api_provider.dart';
+import 'package:todo_app/features/auth/resources/api_repo.dart';
 
 part 'sign_up_event.dart';
 part 'sign_up_state.dart';
 
 class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
-  final ApiProvider _apiProvider = ApiProvider();
+  final ApiRepository _apiRepository = ApiRepository();
 
   SignUpBloc() : super(SignUpInitial()) {
     on<SignUpInitialEvent>(signUpInitialEvent);
@@ -34,7 +34,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
       SignUpButtonClickedActionEvent event, Emitter<SignUpState> emit) async {
     emit(SignUpButtonLoadingState());
 
-    BaseModel baseModel = await _apiProvider.userRegister(
+    BaseModel baseModel = await _apiRepository.userRegister(
         event.name, event.email, event.phone, event.password);
 
     if (baseModel.status == true) {
