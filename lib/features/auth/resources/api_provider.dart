@@ -8,7 +8,10 @@ class ApiProvider {
   final client = http.Client();
   // register
   Future<BaseModel> userRegister(
-      String name, String email, String phone, String password) async {
+      {required String name,
+      required String email,
+      required String phone,
+      required String password}) async {
     // var header = {
     //   "Content-Type": "application/json",
     // };
@@ -28,21 +31,20 @@ class ApiProvider {
   }
 
   //login
-  Future<LoginDataModel> userLogin(String phone, String password) async {
+  Future<LoginDataModel> userLogin({required password, required email}) async {
     var uri = Uri.parse("$baseUrl/user/login");
     return LoginDataModel(token: "Token", status: false, message: "");
   }
 
   // forget password
-  Future<BaseModel> userForgetPassword(String phone) async {
-    var uri = Uri.parse("$baseUrl/user/register");
-    return BaseModel(message: "message", status: false);
-  }
-
-  // user details
-  Future<BaseModel> userDetails(String phone) async {
-    var uri = Uri.parse("$baseUrl/user");
-    return BaseModel(message: "message", status: false);
+  Future<BaseModel> userForgetPassword({required String email}) async {
+    var uri = Uri.parse("$baseUrl/user/forget_password");
+    try {
+      var response = await client.post(uri, body: {"email": email});
+      return baseModelFromJson(response.body);
+    } catch (e) {
+      return BaseModel(status: false, message: e.toString());
+    }
   }
 
   Future<BaseModel> otpVerify(

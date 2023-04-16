@@ -7,19 +7,20 @@ class ApiRepository {
   final ApiProvider _apiProvider = ApiProvider();
 
   Future<BaseModel> userRegister(String name, email, phone, password) {
-    return _apiProvider.userRegister(name, email, phone, password);
+    return _apiProvider.userRegister(
+      email: email,
+      name: name,
+      password: password,
+      phone: phone,
+    );
   }
 
-  Future<LoginDataModel> userLogin(String phone, password) {
-    return _apiProvider.userLogin(phone, password);
+  Future<LoginDataModel> userLogin(String email, password) {
+    return _apiProvider.userLogin(email: email, password: password);
   }
 
-  Future<BaseModel> userForgetPassword(String phone) {
-    return _apiProvider.userForgetPassword(phone);
-  }
-
-  Future<BaseModel> userUserDetails(String phone) {
-    return _apiProvider.userDetails(phone);
+  Future<BaseModel> userForgetPassword(String email) {
+    return _apiProvider.userForgetPassword(email: email);
   }
 
   Future<BaseModel> otpVerify(String otp, String email) {
