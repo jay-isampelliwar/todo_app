@@ -4,7 +4,7 @@ import 'package:todo_app/features/auth/login/model/login_data_model.dart';
 import '../../../core/model/base_data_model.dart';
 
 class ApiProvider {
-  final String baseUrl = "https://cautious-duck-hospital-gown.cyclic.app";
+  final String baseUrl = "https://todo-n03l.onrender.com";
   final client = http.Client();
   // register
   Future<BaseModel> userRegister(
