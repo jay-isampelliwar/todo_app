@@ -23,7 +23,7 @@ class LoginDataModel {
   factory LoginDataModel.fromJson(Map<String, dynamic> json) => LoginDataModel(
         status: json["status"],
         message: json["message"],
-        token: json["token"],
+        token: json["token"] ?? "",
       );
 
   Map<String, dynamic> toJson() => {
