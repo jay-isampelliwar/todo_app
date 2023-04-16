@@ -21,4 +21,8 @@ class ApiRepository {
   Future<BaseModel> userUserDetails(String phone) {
     return _apiProvider.userDetails(phone);
   }
+
+  Future<BaseModel> otpVerify(String otp, String email) {
+    return _apiProvider.otpVerify(otp: otp, email: email);
+  }
 }

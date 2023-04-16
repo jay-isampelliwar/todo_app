@@ -23,7 +23,7 @@ class ApiProvider {
       var response = await client.post(uri, body: body);
       return baseModelFromJson(response.body);
     } catch (e) {
-      return BaseModel(message: "message", status: false);
+      return BaseModel(message: e.toString(), status: false);
     }
   }
 
@@ -43,5 +43,21 @@ class ApiProvider {
   Future<BaseModel> userDetails(String phone) async {
     var uri = Uri.parse("$baseUrl/user");
     return BaseModel(message: "message", status: false);
+  }
+
+  Future<BaseModel> otpVerify(
+      {required String otp, required String email}) async {
+    var uri = Uri.parse("$baseUrl/user/verifyOTP");
+    var body = {
+      "otp": otp,
+      "email": email,
+    };
+
+    try {
+      var response = await client.post(uri, body: body);
+      return baseModelFromJson(response.body);
+    } catch (e) {
+      return BaseModel(message: e.toString(), status: false);
+    }
   }
 }
