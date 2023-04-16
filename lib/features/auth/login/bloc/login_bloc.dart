@@ -33,7 +33,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         await _apiRepository.userLogin(event.email, event.password);
 
     if (loginDataModel.status && loginDataModel.token.isNotEmpty) {
-      emit(LoginHomePageNavigateActionState());
+      emit(LoginHomePageNavigateActionState(message: loginDataModel.message));
     } else {
       emit(LoginErrorState(message: loginDataModel.message));
       emit(LoginInitialState());

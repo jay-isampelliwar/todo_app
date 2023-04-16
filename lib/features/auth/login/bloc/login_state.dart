@@ -7,14 +7,17 @@ abstract class LoginActionState extends LoginState {}
 
 class LoginInitialState extends LoginState {}
 
-class LoginErrorState extends LoginState {
+class LoginErrorState extends LoginActionState {
   String message;
   LoginErrorState({required this.message});
 }
 
 class LoginSignUpNavigateActionState extends LoginActionState {}
 
-class LoginHomePageNavigateActionState extends LoginActionState {}
+class LoginHomePageNavigateActionState extends LoginActionState {
+  String message;
+  LoginHomePageNavigateActionState({required this.message});
+}
 
 class LoginPasswordShowState extends LoginState {}
 
