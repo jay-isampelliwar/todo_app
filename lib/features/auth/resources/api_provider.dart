@@ -30,7 +30,13 @@ class ApiProvider {
   //login
   Future<LoginDataModel> userLogin({required password, required email}) async {
     var uri = Uri.parse("$baseUrl/user/login");
-    return LoginDataModel(token: "Token", status: false, message: "");
+    var body = {"email": email, "password": password};
+    try {
+      var response = await client.post(uri, body: body);
+      return loginDataModelFromJson(response.body);
+    } catch (e) {
+      return LoginDataModel(status: false, message: e.toString(), token: "");
+    }
   }
 
   // forget password
