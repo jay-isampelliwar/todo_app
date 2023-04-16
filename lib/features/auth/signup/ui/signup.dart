@@ -5,7 +5,7 @@ import 'package:todo_app/features/auth/otp/ui/otp.dart';
 import 'package:todo_app/features/auth/signup/bloc/sign_up_bloc.dart';
 
 import '../../../../core/constant/app_colors.dart';
-import '../../../../core/constant/const_sizeBox.dart';
+import '../../../../core/constant/const_sizebox.dart';
 import '../../../../core/constant/app_text_field.dart';
 import '../../../../core/helper/app_validator.dart';
 import '../../../../core/wigets/app_snacbar.dart';
@@ -54,6 +54,13 @@ class _SignUpPageState extends State<SignUpPage> {
                           MaterialPageRoute(builder: (context) => LoginPage()));
                       break;
                     case SignUpHomePageNavigatorActionState:
+                      final signUpHomePageNavigatorActionState =
+                          state as SignUpHomePageNavigatorActionState;
+                      ScaffoldMessenger.of(context).showSnackBar(appSnackBar(
+                        size: size,
+                        message: signUpHomePageNavigatorActionState.message,
+                        color: Colors.green,
+                      ));
                       Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -61,9 +68,8 @@ class _SignUpPageState extends State<SignUpPage> {
                                     email: emailTextEditingController.text,
                                   )));
                       break;
-                    case SignUpShowSnackBarState:
-                      final signUpShowSnackBarState =
-                          state as SignUpShowSnackBarState;
+                    case SignUpErrorState:
+                      final signUpShowSnackBarState = state as SignUpErrorState;
                       ScaffoldMessenger.of(context).showSnackBar(
                         appSnackBar(
                           size: size,
@@ -112,18 +118,17 @@ class _SignUpPageState extends State<SignUpPage> {
                           hintText: "Password",
                           inputType: TextInputType.text,
                           obscureText:
-                              state is SignUpPasswordHideButtonClickedState,
+                              state is! SignUpPasswordShowButtonClickedState,
                           textEditingController: passwordTextEditingController,
                           suffixIcon: Icon(
-                            state is SignUpPasswordHideButtonClickedState
+                            state is! SignUpPasswordShowButtonClickedState
                                 ? Icons.remove_red_eye
                                 : Icons.highlight_remove_outlined,
                             color: AppColors.blackColor,
                           ),
                           onSuffix: () {
                             if (state is SignUpPasswordShowButtonClickedState) {
-                              signUpBloc
-                                  .add(SignUpPasswordHideButtonClickedEvent());
+                              signUpBloc.add(SignUpInitialEvent());
                             } else {
                               signUpBloc
                                   .add(SignUpPasswordShowButtonClickedEvent());
@@ -136,6 +141,8 @@ class _SignUpPageState extends State<SignUpPage> {
                         //!CUstom button
                         GestureDetector(
                           onTap: () {
+                            FocusScope.of(context).unfocus();
+
                             if (formKey.currentState!.validate()) {
                               signUpBloc.add(SignUpButtonClickedActionEvent(
                                 name: nameTextEditingController.text,

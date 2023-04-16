@@ -5,7 +5,7 @@ import 'package:todo_app/core/constant/app_colors.dart';
 import 'package:todo_app/core/helper/app_validator.dart';
 
 import '../../../../core/constant/app_text_field.dart';
-import '../../../../core/constant/const_sizeBox.dart';
+import '../../../../core/constant/const_sizebox.dart';
 
 import '../../../home/ui/home.dart';
 import '../../widgets/todo_label.dart';
@@ -88,6 +88,7 @@ class LoginPage extends StatelessWidget {
                         constHightSizedBox(0.06, size.height),
                         GestureDetector(
                           onTap: () {
+                            FocusScope.of(context).unfocus();
                             if (formKey.currentState!.validate()) {
                               loginBloc.add(LoginLoginButtonClickedActionEvent(
                                   email: emailTextEditingController.text,

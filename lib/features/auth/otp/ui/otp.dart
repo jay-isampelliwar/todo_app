@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_app/core/constant/app_colors.dart';
 import 'package:todo_app/core/constant/app_font_styles.dart';
 import 'package:todo_app/core/constant/app_text_field.dart';
-import 'package:todo_app/core/constant/const_sizeBox.dart';
+import 'package:todo_app/core/constant/const_sizebox.dart';
 import 'package:todo_app/core/helper/app_validator.dart';
 import 'package:todo_app/core/wigets/app_snacbar.dart';
 import 'package:todo_app/features/auth/otp/bloc/otp_bloc.dart';
@@ -31,17 +31,17 @@ class OTPScreen extends StatelessWidget {
               listener: (context, state) {
                 if (state is OtpVerifyErrorActionState) {
                   final otpVerifyErrorActionState = state;
-                  appSnackBar(
+                  ScaffoldMessenger.of(context).showSnackBar(appSnackBar(
                       size: size,
                       message: otpVerifyErrorActionState.message,
-                      color: Colors.red);
+                      color: Colors.red));
                 } else if (state is OtpVerifyButtonClickedActionState) {
                   final otpVerifyButtonClickedActionState = state;
-                  appSnackBar(
+                  ScaffoldMessenger.of(context).showSnackBar(appSnackBar(
                     size: size,
                     message: otpVerifyButtonClickedActionState.message,
                     color: Colors.green,
-                  );
+                  ));
 
                   Navigator.pushReplacement(
                       context,
@@ -79,6 +79,7 @@ class OTPScreen extends StatelessWidget {
                     constHightSizedBox(0.06, size.height),
                     GestureDetector(
                       onTap: () {
+                        FocusScope.of(context).unfocus();
                         if (formKey.currentState!.validate()) {
                           _otpBloc.add(OtpVerifyButtonClickedActionEvent(
                               otp: textEditingController.text, email: email));
