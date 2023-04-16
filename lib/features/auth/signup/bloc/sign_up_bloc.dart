@@ -11,7 +11,7 @@ part 'sign_up_state.dart';
 class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   final ApiRepository _apiRepository = ApiRepository();
 
-  SignUpBloc() : super(SignUpInitial()) {
+  SignUpBloc() : super(SignUpInitialState()) {
     on<SignUpInitialEvent>(signUpInitialEvent);
 
     on<SignUpButtonClickedActionEvent>(signUpButtonClickedActionEvent);
@@ -41,6 +41,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
       emit(SignUpHomePageNavigatorActionState());
     } else {
       emit(SignUpShowSnackBarState(message: baseModel.message));
+      emit(SignUpInitialState());
     }
   }
 
