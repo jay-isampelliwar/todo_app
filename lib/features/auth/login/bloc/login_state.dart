@@ -5,13 +5,16 @@ abstract class LoginState {}
 
 abstract class LoginActionState extends LoginState {}
 
-class LoginInitial extends LoginState {}
+class LoginInitialState extends LoginState {}
 
-class LoginErrorState extends LoginState {}
+class LoginErrorState extends LoginState {
+  String message;
+  LoginErrorState({required this.message});
+}
 
 class LoginSignUpNavigateActionState extends LoginActionState {}
 
-class LoginButtonClickedActionState extends LoginActionState {}
+class LoginHomePageNavigateActionState extends LoginActionState {}
 
 class LoginPasswordShowState extends LoginState {}
 

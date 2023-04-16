@@ -2,16 +2,22 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
+import 'package:todo_app/features/auth/login/model/login_data_model.dart';
+import 'package:todo_app/features/auth/resources/api_repo.dart';
 
 part 'login_event.dart';
 part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  LoginBloc() : super(LoginInitial()) {
+  final ApiRepository _apiRepository = ApiRepository();
+
+  LoginBloc() : super(LoginInitialState()) {
     on<LoginSignUpNavigateActionEvent>(loginSignUpNavigateActionEvent);
     on<LoginLoginButtonClickedActionEvent>(loginLoginButtonClickedActionEvent);
     on<LoginPasswordShowButtonEvent>(loginPasswordShowButtonEvent);
     on<LoginPasswordHideButtonEvent>(loginPasswordHideButtonEvent);
+    on<LoginForgetPasswordButtonClickedActionEvent>(
+        loginForgetPasswordButtonClickedActionEvent);
   }
 
   FutureOr<void> loginSignUpNavigateActionEvent(
@@ -22,10 +28,16 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   FutureOr<void> loginLoginButtonClickedActionEvent(
       LoginLoginButtonClickedActionEvent event,
       Emitter<LoginState> emit) async {
-    //!API_CALL
     emit(LoginLoginLoadingButtonState());
-    await Future.delayed(const Duration(seconds: 2));
-    emit(LoginButtonClickedActionState());
+    LoginDataModel loginDataModel =
+        await _apiRepository.userLogin(event.email, event.password);
+
+    if (loginDataModel.status && loginDataModel.token.isNotEmpty) {
+      emit(LoginHomePageNavigateActionState());
+    } else {
+      emit(LoginErrorState(message: loginDataModel.message));
+      emit(LoginInitialState());
+    }
   }
 
   FutureOr<void> loginPasswordShowButtonEvent(
@@ -37,4 +49,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       LoginPasswordHideButtonEvent event, Emitter<LoginState> emit) {
     emit(LoginPasswordHideState());
   }
+
+  FutureOr<void> loginForgetPasswordButtonClickedActionEvent(
+      LoginForgetPasswordButtonClickedActionEvent event,
+      Emitter<LoginState> emit) {}
 }
