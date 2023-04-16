@@ -56,8 +56,8 @@ class LoginPage extends StatelessWidget {
                     child: Column(
                       children: [
                         AppTextField(
-                          hintText: "Mobile Number",
-                          inputType: TextInputType.number,
+                          hintText: "Email",
+                          inputType: TextInputType.emailAddress,
                           obscureText: false,
                           textEditingController: emailTextEditingController,
                           validator: (text) =>
