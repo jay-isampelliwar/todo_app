@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/core/constant/app_colors.dart';
 import 'package:todo_app/core/constant/app_font_styles.dart';
-import 'package:todo_app/core/constant/const_sizeBox.dart';
+import 'package:todo_app/core/constant/const_sizebox.dart';
 
 class TodoPage extends StatelessWidget {
   TodoPage({super.key});
