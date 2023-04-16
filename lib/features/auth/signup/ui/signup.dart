@@ -120,7 +120,12 @@ class _SignUpPageState extends State<SignUpPage> {
                         GestureDetector(
                           onTap: () {
                             if (formKey.currentState!.validate()) {
-                              signUpBloc.add(SignUpButtonClickedActionEvent());
+                              signUpBloc.add(SignUpButtonClickedActionEvent(
+                                name: nameTextEditingController.text,
+                                email: emailTextEditingController.text,
+                                phone: phoneTextEditingController.text,
+                                password: passwordTextEditingController.text,
+                              ));
                             }
                           },
                           child: Container(

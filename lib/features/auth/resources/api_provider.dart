@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:http/http.dart' as http;
 import 'package:todo_app/features/auth/login/model/login_data_model.dart';
 
@@ -12,9 +14,18 @@ class ApiProvider {
     var uri = Uri.parse("$baseUrl/user/register");
 
     try {
-      // var response = await client.post();
-    } catch (e) {}
-    return BaseModel(message: "message", status: false);
+      var body = jsonEncode({
+        "name": name,
+        "email": email,
+        "phone": phone,
+        "password": password,
+      });
+      var header = {"Content-Type": "application/json"};
+      var response = await client.post(uri, body: body, headers: header);
+      return baseModelFromJson(response.body);
+    } catch (e) {
+      return BaseModel(message: e.toString(), status: false);
+    }
   }
 
   //login

@@ -15,4 +15,15 @@ class SignUpPasswordShowButtonClickedEvent extends SignUpEvent {}
 
 class SignUpLoginButtonClickedActionEvent extends SignUpEvent {}
 
-class SignUpButtonClickedActionEvent extends SignUpEvent {}
+class SignUpButtonClickedActionEvent extends SignUpEvent {
+  String name;
+  String password;
+  String email;
+  String phone;
+
+  SignUpButtonClickedActionEvent(
+      {required this.name,
+      required this.password,
+      required this.phone,
+      required this.email});
+}
