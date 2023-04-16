@@ -59,6 +59,14 @@ class _SignUpPageState extends State<SignUpPage> {
                           MaterialPageRoute(
                               builder: (context) => const HomePage()));
                       break;
+                    case SignUpShowSnackBarState:
+                      final signUpShowSnackBarState =
+                          state as SignUpShowSnackBarState;
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(signUpShowSnackBarState.message),
+                        ),
+                      );
                   }
                 },
                 builder: (context, state) {
@@ -120,7 +128,12 @@ class _SignUpPageState extends State<SignUpPage> {
                         GestureDetector(
                           onTap: () {
                             if (formKey.currentState!.validate()) {
-                              signUpBloc.add(SignUpButtonClickedActionEvent());
+                              signUpBloc.add(SignUpButtonClickedActionEvent(
+                                name: nameTextEditingController.text,
+                                email: emailTextEditingController.text,
+                                phone: phoneTextEditingController.text,
+                                password: passwordTextEditingController.text,
+                              ));
                             }
                           },
                           child: Container(

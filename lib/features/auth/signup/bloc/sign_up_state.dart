@@ -16,3 +16,10 @@ class SignUpPasswordShowButtonClickedState extends SignUpState {}
 class SignUpHomePageNavigatorActionState extends SignUpActionState {}
 
 class SignUpLoginNavigatorActionState extends SignUpActionState {}
+
+class SignUpShowSnackBarState extends SignUpActionState {
+  String message;
+  SignUpShowSnackBarState({
+    required this.message,
+  });
+}

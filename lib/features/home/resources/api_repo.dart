@@ -5,19 +5,19 @@ import 'package:todo_app/features/home/resources/api_provider.dart';
 class HomeApiRepository {
   final HomeApiProvider _homeApiProvider = HomeApiProvider();
 
-  Future<TodoListModel> getAllTask() {
+  Future<TodoDataModel> getAllTask() {
     return _homeApiProvider.getAllTask();
   }
 
-  Future<TodoListModel> getBusiness() {
+  Future<TodoDataModel> getBusiness() {
     return _homeApiProvider.getBusiness();
   }
 
-  Future<TodoListModel> getPersonal() {
+  Future<TodoDataModel> getPersonal() {
     return _homeApiProvider.getPersonal();
   }
 
-  Future<TodoListModel> getUrgent() {
+  Future<TodoDataModel> getUrgent() {
     return _homeApiProvider.getUrgent();
   }
 
