@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todo_app/core/wigets/app_snacbar.dart';
 import 'package:todo_app/features/auth/signup/ui/signup.dart';
 import 'package:todo_app/core/constant/app_colors.dart';
 import 'package:todo_app/core/helper/app_validator.dart';
@@ -38,7 +39,13 @@ class LoginPage extends StatelessWidget {
                 listenWhen: (previous, current) => current is LoginActionState,
                 buildWhen: (previous, current) => current is! LoginActionState,
                 listener: (context, state) {
-                  if (state is LoginHomePageNavigateActionState) {
+                  if (state is LoginErrorState) {
+                    final loginErrorState = state;
+                    ScaffoldMessenger.of(context).showSnackBar(appSnackBar(
+                        size: size,
+                        message: loginErrorState.message,
+                        color: Colors.red));
+                  } else if (state is LoginHomePageNavigateActionState) {
                     Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
@@ -61,7 +68,7 @@ class LoginPage extends StatelessWidget {
                           obscureText: false,
                           textEditingController: emailTextEditingController,
                           validator: (text) =>
-                              FieldValidator.numberValidator(text),
+                              FieldValidator.emailValidator(text),
                         ),
                         constHightSizedBox(0.02, size.height),
                         AppTextField(
@@ -82,8 +89,7 @@ class LoginPage extends StatelessWidget {
                               loginBloc.add(LoginPasswordShowButtonEvent());
                             }
                           },
-                          validator: (text) =>
-                              FieldValidator.passwordValidator(text),
+                          validator: (text) => null,
                         ),
                         constHightSizedBox(0.06, size.height),
                         GestureDetector(
