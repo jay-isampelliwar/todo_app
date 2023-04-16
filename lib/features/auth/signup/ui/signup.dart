@@ -8,6 +8,7 @@ import '../../../../core/constant/app_colors.dart';
 import '../../../../core/constant/const_sizeBox.dart';
 import '../../../../core/constant/app_text_field.dart';
 import '../../../../core/helper/app_validator.dart';
+import '../../../../core/wigets/app_snacbar.dart';
 import '../../widgets/todo_label.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -65,8 +66,10 @@ class _SignUpPageState extends State<SignUpPage> {
                       final signUpShowSnackBarState =
                           state as SignUpShowSnackBarState;
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(signUpShowSnackBarState.message),
+                        appSnackBar(
+                          size: size,
+                          message: signUpShowSnackBarState.message,
+                          color: Colors.red,
                         ),
                       );
                   }
