@@ -3,13 +3,14 @@ import 'package:todo_app/core/model/base_data_model.dart';
 import 'package:todo_app/features/home/model/todo_data_model.dart';
 
 class HomeApiProvider {
-  String baseUrl = "http://3001";
+  String baseUrl = "https://todo-n03l.onrender.com";
   final client = http.Client();
 
   //get all task
 
   Future<TodoDataModel> getAllTask() async {
     var uri = Uri.parse("$baseUrl/todo/getTasks");
+<<<<<<< HEAD
     try {} catch (e) {}
     return TodoDataModel(data: [Datum(id: "dd")], status: false);
   }
@@ -31,6 +32,8 @@ class HomeApiProvider {
   // get urgent task
   Future<TodoDataModel> getUrgent() async {
     var uri = Uri.parse("$baseUrl/todo/urgent");
+=======
+>>>>>>> 7ac6a43dbf1a9419fa88a657daf7690214d63101
     try {} catch (e) {}
     return TodoDataModel(data: [Datum(id: "dd")], status: false);
   }

@@ -77,46 +77,42 @@ class _HomePageState extends State<HomePage> {
                       style: AppTextStyle.text44(),
                     ),
                     constHightSizedBox(0.02, size.height),
-                    Text(
-                      "Category",
-                      style: AppTextStyle.text20(true),
-                    ),
-                    constHightSizedBox(0.02, size.height),
-                    Container(
-                      height: size.height * 0.16,
-                      width: size.width,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(24),
-                      ),
-                      child: ListView.builder(
-                        padding: EdgeInsets.zero,
-                        scrollDirection: Axis.horizontal,
-                        itemCount: 4,
-                        shrinkWrap: true,
-                        itemBuilder: (context, index) {
-                          return GestureDetector(
-                            onTap: () {
-                              if (index == 0) {
-                                homeBloc.add(HomeAllTaskCardClickedEvent());
-                              }
-                              if (index == 1) {
-                                homeBloc.add(HomeUrgentCardClickedEvent());
-                              }
-                              if (index == 2) {
-                                homeBloc.add(HomeBusinessCardClickedEvent());
-                              }
-                              if (index == 3) {
-                                homeBloc.add(HomePersonalCardClickedEvent());
-                              }
-                            },
-                            child: const TaskCategoryCard(),
-                          );
-                        },
-                      ),
-                    ),
+
+                    // Container(
+                    //   height: size.height * 0.16,
+                    //   width: size.width,
+                    //   decoration: BoxDecoration(
+                    //     borderRadius: BorderRadius.circular(24),
+                    //   ),
+                    //   child: ListView.builder(
+                    //     padding: EdgeInsets.zero,
+                    //     scrollDirection: Axis.horizontal,
+                    //     itemCount: 4,
+                    //     shrinkWrap: true,
+                    //     itemBuilder: (context, index) {
+                    //       return GestureDetector(
+                    //         onTap: () {
+                    //           if (index == 0) {
+                    //             homeBloc.add(HomeAllTaskCardClickedEvent());
+                    //           }
+                    //           if (index == 1) {
+                    //             homeBloc.add(HomeUrgentCardClickedEvent());
+                    //           }
+                    //           if (index == 2) {
+                    //             homeBloc.add(HomeBusinessCardClickedEvent());
+                    //           }
+                    //           if (index == 3) {
+                    //             homeBloc.add(HomePersonalCardClickedEvent());
+                    //           }
+                    //         },
+                    //         child: const TaskCategoryCard(),
+                    //       );
+                    //     },
+                    //   ),
+                    // ),
                     constHightSizedBox(0.03, size.height),
                     Text(
-                      getText(state),
+                      "All Task",
                       style: AppTextStyle.text24(true)
                           .copyWith(color: AppColors.greyTextColor),
                     ),
@@ -159,18 +155,18 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  String getText(HomeState state) {
-    switch (state.runtimeType) {
-      case HomeBusinessCardClickedState:
-        return "Business";
-      case HomePersonalCardClickedState:
-        return "Personal";
-      case HomeUrgentCardClickedState:
-        return "Urgent";
-      default:
-        return "All Task";
-    }
-  }
+  // String getText(HomeState state) {
+  //   switch (state.runtimeType) {
+  //     case HomeBusinessCardClickedState:
+  //       return "Business";
+  //     case HomePersonalCardClickedState:
+  //       return "Personal";
+  //     case HomeUrgentCardClickedState:
+  //       return "Urgent";
+  //     default:
+  //       return "All Task";
+  //   }
+  // }
 }
 
 class TaskCard extends StatelessWidget {

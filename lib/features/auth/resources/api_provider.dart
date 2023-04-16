@@ -4,7 +4,7 @@ import 'package:todo_app/features/auth/login/model/login_data_model.dart';
 import '../../../core/model/base_data_model.dart';
 
 class ApiProvider {
-  final String baseUrl = "http://localhost:3001";
+  final String baseUrl = "http://3001";
   final client = http.Client();
   // register
   Future<BaseModel> userRegister(
@@ -19,15 +19,9 @@ class ApiProvider {
       "password": password,
     };
     try {
-      var uri = Uri.parse("$baseUrl/user/register");
-      var response = await client.post(
-        uri,
-        body: body,
-      );
-      return baseModelFromJson(response.body);
-    } catch (e) {
-      return BaseModel(status: false, message: "Error");
-    }
+      // var response = await client.post();
+    } catch (e) {}
+    return BaseModel(message: "message", status: false);
   }
 
   //login
@@ -38,7 +32,7 @@ class ApiProvider {
 
   // forget password
   Future<BaseModel> userForgetPassword(String phone) async {
-    var uri = Uri.parse("$baseUrl/user/forget_password");
+    var uri = Uri.parse("$baseUrl/user/register");
     return BaseModel(message: "message", status: false);
   }
 
