@@ -13,6 +13,8 @@ class SignUpButtonLoadingState extends SignUpState {}
 
 class SignUpPasswordShowButtonClickedState extends SignUpState {}
 
+class SignUpPasswordHideButtonClickedState extends SignUpState {}
+
 class SignUpHomePageNavigatorActionState extends SignUpActionState {}
 
 class SignUpLoginNavigatorActionState extends SignUpActionState {}

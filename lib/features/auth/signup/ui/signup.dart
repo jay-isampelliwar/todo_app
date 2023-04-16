@@ -25,7 +25,6 @@ class _SignUpPageState extends State<SignUpPage> {
   TextEditingController nameTextEditingController = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   FocusNode focusNode = FocusNode();
-  bool flag = true;
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +74,6 @@ class _SignUpPageState extends State<SignUpPage> {
                   }
                 },
                 builder: (context, state) {
-                  flag = !flag;
                   return Form(
                     key: formKey,
                     child: Column(
@@ -113,17 +111,23 @@ class _SignUpPageState extends State<SignUpPage> {
                         AppTextField(
                           hintText: "Password",
                           inputType: TextInputType.text,
-                          obscureText: flag,
+                          obscureText:
+                              state is SignUpPasswordHideButtonClickedState,
                           textEditingController: passwordTextEditingController,
                           suffixIcon: Icon(
-                            flag
+                            state is SignUpPasswordHideButtonClickedState
                                 ? Icons.remove_red_eye
                                 : Icons.highlight_remove_outlined,
                             color: AppColors.blackColor,
                           ),
                           onSuffix: () {
-                            signUpBloc
-                                .add(SignUpPasswordShowButtonClickedEvent());
+                            if (state is SignUpPasswordShowButtonClickedState) {
+                              signUpBloc
+                                  .add(SignUpPasswordHideButtonClickedEvent());
+                            } else {
+                              signUpBloc
+                                  .add(SignUpPasswordShowButtonClickedEvent());
+                            }
                           },
                           validator: (text) =>
                               FieldValidator.passwordValidator(text),

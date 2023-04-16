@@ -11,6 +11,8 @@ class SignUpLoginButtonClickedEvent extends SignUpEvent {}
 
 class SignUpPasswordShowButtonClickedEvent extends SignUpEvent {}
 
+class SignUpPasswordHideButtonClickedEvent extends SignUpEvent {}
+
 //*==============================================
 
 class SignUpLoginButtonClickedActionEvent extends SignUpEvent {}
