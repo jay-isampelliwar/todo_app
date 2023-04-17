@@ -9,6 +9,8 @@ class TodoInitial extends TodoState {}
 
 class TodoButtonLoadingState extends TodoState {}
 
+class TodoUpdateActionState extends TodoActionState {}
+
 class TodoAddTaskButtonClickedActionState extends TodoActionState {}
 
 class TodoCloseButtonClickedActionState extends TodoActionState {}

@@ -24,10 +24,20 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
       Emitter<TodoState> emit) async {
     emit(TodoButtonLoadingState());
     BaseModel baseModel = await _homeApiRepository.createTodo(event.title);
+
+    if (baseModel.status) {
+      emit(TodoSuccessActionState(message: baseModel.message));
+      emit(TodoInitial());
+      emit(TodoUpdateActionState());
+    } else {
+      emit(TodoErrorActionState(message: baseModel.message));
+    }
   }
 
   FutureOr<void> todoCloseButtonClickedActionEvent(
-      TodoCloseButtonClickedActionEvent event, Emitter<TodoState> emit) {}
+      TodoCloseButtonClickedActionEvent event, Emitter<TodoState> emit) {
+    emit(TodoCloseButtonClickedActionState());
+  }
 
   FutureOr<void> todoUpdateButtonClickedActionEvent(
       TodoUpdateTaskButtonClickedActionEvent event,
@@ -39,6 +49,7 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
     if (baseModel.status) {
       emit(TodoSuccessActionState(message: baseModel.message));
       emit(TodoInitial());
+      emit(TodoUpdateActionState());
     } else {
       emit(TodoErrorActionState(message: baseModel.message));
     }
