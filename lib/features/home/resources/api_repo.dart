@@ -9,18 +9,6 @@ class HomeApiRepository {
     return _homeApiProvider.getAllTask();
   }
 
-  Future<TodoDataModel> getBusiness() {
-    return _homeApiProvider.getBusiness();
-  }
-
-  Future<TodoDataModel> getPersonal() {
-    return _homeApiProvider.getPersonal();
-  }
-
-  Future<TodoDataModel> getUrgent() {
-    return _homeApiProvider.getUrgent();
-  }
-
   Future<BaseModel> createTodo(String title) {
     return _homeApiProvider.createTodo(title);
   }
