@@ -10,7 +10,12 @@ class HomeUpdatePageEvent extends HomeEvent {
   HomeUpdatePageEvent({required this.todo});
 }
 
-class HomeTaskClickedActionEvent extends HomeEvent {}
+class HomeAddTaskButtonClickedActionEvent extends HomeEvent {}
+
+class HomeTaskClickedActionEvent extends HomeEvent {
+  Datum todo;
+  HomeTaskClickedActionEvent({required this.todo});
+}
 
 class HomeTaskDeleteEvent extends HomeEvent {
   Datum todo;

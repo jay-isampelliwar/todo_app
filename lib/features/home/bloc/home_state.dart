@@ -30,7 +30,10 @@ class HomeErrorActionState extends HomeActionState {
   });
 }
 
-class HomeTaskClickedActionState extends HomeActionState {}
+class HomeTaskClickedActionState extends HomeActionState {
+  Datum todo;
+  HomeTaskClickedActionState({required this.todo});
+}
 
 class HomeTaskDoneButtonClickedState extends HomeState {}
 

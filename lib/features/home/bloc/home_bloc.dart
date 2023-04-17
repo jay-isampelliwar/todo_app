@@ -18,6 +18,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<HomeTaskDeleteEvent>(homeTaskDeleteEvent);
     on<HomeTaskClickedActionEvent>(homeTaskClickedActionEvent);
     on<HomeNewTaskAddEvent>(homeNewTaskAddEvent);
+    on<HomeAddTaskButtonClickedActionEvent>(
+        homeAddTaskButtonClickedActionEvent);
     // on<HomeUpdatePageEvent>(homeUpdatePageEvent);
   }
   FutureOr<void> homeInitialEvent(
@@ -36,7 +38,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   FutureOr<void> homeTaskClickedActionEvent(
       HomeTaskClickedActionEvent event, Emitter<HomeState> emit) {
-    emit(HomeTaskClickedActionState());
+    emit(HomeTaskClickedActionState(todo: event.todo));
   }
 
   FutureOr<void> homeNewTaskAddEvent(
@@ -57,5 +59,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       todoDataModel.data.add(event.todo);
       emit(HomeLoadingSuccessState(todoList: todoDataModel.data));
     }
+  }
+
+  FutureOr<void> homeAddTaskButtonClickedActionEvent(
+      HomeAddTaskButtonClickedActionEvent event, Emitter<HomeState> emit) {
+    emit(HomeAddTaskButtonClickedActionState());
   }
 }
