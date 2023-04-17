@@ -13,8 +13,8 @@ class HomeApiRepository {
     return _homeApiProvider.createTodo(title);
   }
 
-  Future<BaseModel> updateTodo(String title) {
-    return _homeApiProvider.updateTodo(title);
+  Future<BaseModel> updateTodo(String title, String id) {
+    return _homeApiProvider.updateTodo(title, id);
   }
 
   Future<BaseModel> deleteTodo(String id) {

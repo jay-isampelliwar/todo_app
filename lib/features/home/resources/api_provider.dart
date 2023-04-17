@@ -37,7 +37,7 @@ class HomeApiProvider {
   }
 
   //update
-  Future<BaseModel> updateTodo(String id) async {
+  Future<BaseModel> updateTodo(String title, String id) async {
     var uri = Uri.parse("$baseUrl/todo/update");
     try {
       return BaseModel(status: false, message: "");
