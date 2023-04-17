@@ -58,11 +58,6 @@ class LoginPage extends StatelessWidget {
                         message: loginErrorState.message,
                         color: Colors.red));
                   } else if (state is LoginHomePageNavigateActionState) {
-                    final loginPageNavigate = state;
-                    ScaffoldMessenger.of(context).showSnackBar(appSnackBar(
-                        size: size,
-                        message: loginPageNavigate.message,
-                        color: Colors.green));
                     Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
