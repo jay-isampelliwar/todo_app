@@ -4,7 +4,9 @@ import 'package:todo_app/core/constant/app_colors.dart';
 import 'package:todo_app/core/constant/app_font_styles.dart';
 import 'package:todo_app/core/constant/const_sizebox.dart';
 import 'package:todo_app/features/home/model/todo_data_model.dart';
+import 'package:todo_app/features/home/ui/home.dart';
 
+import '../../../core/wigets/app_snacbar.dart';
 import '../bloc/todo_bloc.dart';
 
 class TodoPage extends StatefulWidget {
@@ -32,6 +34,7 @@ class _TodoPageState extends State<TodoPage> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: Colors.grey.shade200,
       body: Container(
         padding: EdgeInsets.symmetric(
           horizontal: size.width * 0.04,
@@ -41,7 +44,19 @@ class _TodoPageState extends State<TodoPage> {
           listenWhen: (previous, current) => current is TodoActionState,
           buildWhen: (previous, current) => current is! TodoActionState,
           listener: (context, state) {
-            if (state is TodoAddTaskButtonClickedActionState) {
+            if (state is TodoUpdateActionState ||
+                state is TodoAddTaskButtonClickedActionState) {
+              Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => const HomePage()),
+                  (route) => false);
+            }
+            if (state is TodoErrorActionState) {
+              ScaffoldMessenger.of(context).showSnackBar(appSnackBar(
+                  size: size, message: state.message, color: Colors.red));
+            } else if (state is TodoSuccessActionState) {
+              ScaffoldMessenger.of(context).showSnackBar(appSnackBar(
+                  size: size, message: state.message, color: Colors.green));
             } else if (state is TodoCloseButtonClickedActionState) {
               Navigator.pop(context);
             }
@@ -85,8 +100,6 @@ class _TodoPageState extends State<TodoPage> {
                 key: formKey,
                 child: TextFormField(
                   autofocus: true,
-                  maxLines: null,
-                  maxLength: 60,
                   controller: todoTextEditingController,
                   decoration: InputDecoration(
                     hintText: "Todo Title",
@@ -125,9 +138,9 @@ class _TodoPageState extends State<TodoPage> {
                   child: Align(
                       child: Visibility(
                     replacement: const CircularProgressIndicator(),
-                    visible: State is TodoButtonLoadingState,
+                    visible: state is! TodoButtonLoadingState,
                     child: Text(
-                      "Add Todo",
+                      widget.todo == null ? "Add Todo" : "Update",
                       style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.w700,
