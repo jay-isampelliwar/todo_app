@@ -17,7 +17,7 @@ class HomeApiRepository {
     return _homeApiProvider.updateTodo(title);
   }
 
-  Future<BaseModel> deleteTodo() {
-    return _homeApiProvider.deleteTodo();
+  Future<BaseModel> deleteTodo(String id) {
+    return _homeApiProvider.deleteTodo(id);
   }
 }
