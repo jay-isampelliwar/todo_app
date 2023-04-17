@@ -30,6 +30,7 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: Colors.grey.shade200,
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(

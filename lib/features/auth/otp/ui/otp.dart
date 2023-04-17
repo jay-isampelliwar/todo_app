@@ -19,6 +19,7 @@ class OTPScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: Colors.grey.shade200,
       body: Center(
         child: SingleChildScrollView(
           child: Container(

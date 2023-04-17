@@ -31,6 +31,7 @@ class _SignUpPageState extends State<SignUpPage> {
     Size size = MediaQuery.of(context).size;
     final SignUpBloc signUpBloc = SignUpBloc();
     return Scaffold(
+      backgroundColor: Colors.grey.shade200,
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.only(
