@@ -40,7 +40,10 @@ class HomeApiProvider {
   Future<BaseModel> updateTodo(String title, String id) async {
     var uri = Uri.parse("$baseUrl/todo/update");
     try {
-      return BaseModel(status: false, message: "");
+      var response = await client.put(uri,
+          body: {"title": title, "id": id},
+          headers: {"Authorization": "Bearer $appLoginToken"});
+      return baseModelFromJson(response.body);
     } catch (e) {
       return BaseModel(message: e.toString(), status: false);
     }

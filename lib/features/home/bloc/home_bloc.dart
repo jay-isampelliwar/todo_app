@@ -30,7 +30,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
     if (todoDataModel.status) {
       emit(HomeLoadingSuccessState(todoList: todoDataModel.data));
-      emit(HomeSuccessActionState(message: "Success"));
     } else {
       emit(HomeErrorActionState(message: "Something Went Wrong"));
     }

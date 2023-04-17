@@ -6,9 +6,7 @@ import '../../../core/model/base_data_model.dart';
 class ApiProvider {
   final String baseUrl = "https://todo-n03l.onrender.com";
   final client = http.Client();
-
-  //* User Register
-
+  // register
   Future<BaseModel> userRegister(
       {required String name,
       required String email,
@@ -29,8 +27,7 @@ class ApiProvider {
     }
   }
 
-  //* User Login
-
+  //login
   Future<LoginDataModel> userLogin({required password, required email}) async {
     var uri = Uri.parse("$baseUrl/user/login");
     var body = {"email": email, "password": password};
@@ -42,8 +39,7 @@ class ApiProvider {
     }
   }
 
-  // *Forget Password
-
+  // forget password
   Future<BaseModel> userForgetPassword(
       {required String email, required String newPassword}) async {
     var uri = Uri.parse("$baseUrl/user/forget_password");
@@ -55,8 +51,6 @@ class ApiProvider {
       return BaseModel(status: false, message: e.toString());
     }
   }
-
-//* Otp Verification
 
   Future<BaseModel> otpVerify(
       {required String otp, required String email}) async {
