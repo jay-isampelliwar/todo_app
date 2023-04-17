@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:todo_app/core/constant/app_colors.dart';
-import 'package:todo_app/core/constant/const_sizebox.dart';
 import 'package:todo_app/features/home/bloc/home_bloc.dart';
 import 'package:todo_app/features/home/model/todo_data_model.dart';
 import 'package:todo_app/features/todo/ui/todo.dart';
@@ -30,6 +29,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: Colors.grey.shade300,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -69,11 +69,6 @@ class _HomePageState extends State<HomePage> {
                   mainAxisSize: MainAxisSize.max,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      "All Tasks",
-                      style: AppTextStyle.text44(),
-                    ),
-                    constHightSizedBox(0.03, size.height),
                     SizedBox(
                       child: ListView.builder(
                         physics: const BouncingScrollPhysics(),
@@ -87,9 +82,12 @@ class _HomePageState extends State<HomePage> {
                                 homeBloc.add(
                                     HomeTaskClickedActionEvent(todo: current));
                               },
-                              child: TaskCard(
-                                todo: current,
-                                homeBloc: homeBloc,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: TaskCard(
+                                  todo: current,
+                                  homeBloc: homeBloc,
+                                ),
                               ));
                         },
                       ),
@@ -140,14 +138,15 @@ class TaskCard extends StatelessWidget {
       ]),
       child: Container(
         height: size.height * 0.07,
-        margin: const EdgeInsets.only(bottom: 5, top: 5, right: 5),
+        margin: const EdgeInsets.only(right: 5),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(14),
-          border: Border.all(
-            color: AppColors.blackColor,
-            width: 1,
-          ),
-        ),
+            color: Colors.grey.shade300,
+            borderRadius: BorderRadius.circular(14),
+            boxShadow: const [
+              BoxShadow(
+                  offset: Offset(-2, -2), color: Colors.white, blurRadius: 2),
+              BoxShadow(offset: Offset(2, 2), color: Colors.grey, blurRadius: 2)
+            ]),
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: size.width * 0.04),
           child: Row(
