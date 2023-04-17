@@ -45,14 +45,19 @@ class _HomePageState extends State<HomePage> {
             buildWhen: (previous, current) => current is! HomeActionState,
             listener: (context, state) {
               if (state is HomeTaskClickedActionState) {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => TodoPage()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => TodoPage(todo: state.todo)));
               } else if (state is HomeErrorActionState) {
                 ScaffoldMessenger.of(context).showSnackBar(appSnackBar(
                     size: size, message: state.message, color: Colors.red));
               } else if (state is HomeSuccessActionState) {
                 ScaffoldMessenger.of(context).showSnackBar(appSnackBar(
                     size: size, message: state.message, color: Colors.green));
+              } else if (state is HomeAddTaskButtonClickedActionState) {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => TodoPage()));
               }
             },
             builder: (context, state) {
@@ -79,7 +84,8 @@ class _HomePageState extends State<HomePage> {
                               homeLoadingSuccessState.todoList[index];
                           return GestureDetector(
                               onTap: () {
-                                homeBloc.add(HomeTaskClickedActionEvent());
+                                homeBloc.add(
+                                    HomeTaskClickedActionEvent(todo: current));
                               },
                               child: TaskCard(
                                 todo: current,
@@ -103,8 +109,7 @@ class _HomePageState extends State<HomePage> {
         child: FloatingActionButton(
           backgroundColor: AppColors.blackColor,
           onPressed: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => TodoPage()));
+            homeBloc.add(HomeAddTaskButtonClickedActionEvent());
           },
           child: Text(
             "+",
