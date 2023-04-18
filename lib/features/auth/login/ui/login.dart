@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive/hive.dart';
 import 'package:todo_app/core/constant/app_font_styles.dart';
 import 'package:todo_app/core/wigets/app_snacbar.dart';
 import 'package:todo_app/features/auth/signup/ui/signup.dart';
@@ -23,7 +24,7 @@ class LoginPage extends StatelessWidget {
       TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   GlobalKey<FormState> forgetKey = GlobalKey<FormState>();
-  FocusNode focusNode = FocusNode();
+  final hiveBox = Hive.box("data_box");
   final LoginBloc loginBloc = LoginBloc();
 
   @override

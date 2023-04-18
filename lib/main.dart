@@ -1,24 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/adapters.dart';
+import 'package:todo_app/features/home/ui/home.dart';
 
 import 'features/auth/signup/ui/signup.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+  await Hive.openBox("data_box");
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
+  MyApp({super.key});
+  final hiveBox = Hive.box("data_box");
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(primarySwatch: Colors.grey),
-      // home: TodoPage(),
-      home: const SignUpPage(),
-      // home: LoginPage(),
-      // home: HomePage(),
-      // home: OTPScreen(email: "Jay@gmai.com"),
-    );
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(primarySwatch: Colors.grey),
+        home: hiveBox.get("Email") != null && hiveBox.get("Password") != null
+            ? const HomePage()
+            : const SignUpPage());
   }
 }

@@ -23,5 +23,3 @@ class LoginForgetPasswordActionEvent extends LoginEvent {
 class LoginPasswordShowButtonEvent extends LoginEvent {}
 
 class LoginPasswordHideButtonEvent extends LoginEvent {}
-
-class LoginForgetPasswordButtonClickedActionEvent extends LoginEvent {}

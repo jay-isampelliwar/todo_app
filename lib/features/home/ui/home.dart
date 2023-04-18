@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:hive/hive.dart';
 import 'package:todo_app/core/constant/app_colors.dart';
 import 'package:todo_app/features/home/bloc/home_bloc.dart';
 import 'package:todo_app/features/home/model/todo_data_model.dart';
@@ -18,9 +19,13 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final HomeBloc homeBloc = HomeBloc();
+  final hiveBox = Hive.box("data_box");
 
   @override
   void initState() {
+    if (hiveBox.get("Email") != null && hiveBox.get("Password") != null) {
+      homeBloc.add(HomeUserLoginEventEvent());
+    }
     homeBloc.add(HomeInitialEvent());
     super.initState();
   }

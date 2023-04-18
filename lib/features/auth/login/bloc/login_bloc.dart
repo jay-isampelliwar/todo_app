@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:hive/hive.dart';
 import 'package:meta/meta.dart';
-import 'package:todo_app/core/helper/token.dart';
 import 'package:todo_app/core/model/base_data_model.dart';
 import 'package:todo_app/features/auth/login/model/login_data_model.dart';
 import 'package:todo_app/features/auth/resources/api_repo.dart';
@@ -12,14 +12,12 @@ part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final ApiRepository _apiRepository = ApiRepository();
-
+  final hiveBox = Hive.box("data_box");
   LoginBloc() : super(LoginInitialState()) {
     on<LoginSignUpNavigateActionEvent>(loginSignUpNavigateActionEvent);
     on<LoginLoginButtonClickedActionEvent>(loginLoginButtonClickedActionEvent);
     on<LoginPasswordShowButtonEvent>(loginPasswordShowButtonEvent);
     on<LoginPasswordHideButtonEvent>(loginPasswordHideButtonEvent);
-    on<LoginForgetPasswordButtonClickedActionEvent>(
-        loginForgetPasswordButtonClickedActionEvent);
     on<LoginForgetPasswordActionEvent>(loginForgetPasswordActionEvent);
   }
 
@@ -36,7 +34,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         await _apiRepository.userLogin(event.email, event.password);
 
     if (loginDataModel.status && loginDataModel.token.isNotEmpty) {
-      appLoginToken = loginDataModel.token;
+      hiveBox.put("Email", event.email);
+      hiveBox.put("Password", event.password);
+      hiveBox.put("Token", loginDataModel.token);
       emit(LoginHomePageNavigateActionState());
     } else {
       emit(LoginErrorState(message: loginDataModel.message));
@@ -53,10 +53,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       LoginPasswordHideButtonEvent event, Emitter<LoginState> emit) {
     emit(LoginPasswordHideState());
   }
-
-  FutureOr<void> loginForgetPasswordButtonClickedActionEvent(
-      LoginForgetPasswordButtonClickedActionEvent event,
-      Emitter<LoginState> emit) {}
 
   FutureOr<void> loginForgetPasswordActionEvent(
       LoginForgetPasswordActionEvent event, Emitter<LoginState> emit) async {
