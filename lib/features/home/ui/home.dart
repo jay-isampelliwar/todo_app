@@ -9,6 +9,7 @@ import 'package:todo_app/features/todo/ui/todo.dart';
 
 import '../../../core/constant/app_font_styles.dart';
 import '../../../core/wigets/app_snacbar.dart';
+import '../../auth/login/ui/login.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -35,10 +36,21 @@ class _HomePageState extends State<HomePage> {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.grey.shade300,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-      ),
+      appBar:
+          AppBar(backgroundColor: Colors.transparent, elevation: 0, actions: [
+        Padding(
+          padding: const EdgeInsets.only(right: 10),
+          child: IconButton(
+            onPressed: () {
+              homeBloc.add(HomeLogoutButtonClickedActionEvent());
+            },
+            icon: Icon(
+              Icons.logout_outlined,
+              size: size.height * 0.03,
+            ),
+          ),
+        ),
+      ]),
       body: SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.symmetric(
@@ -63,6 +75,11 @@ class _HomePageState extends State<HomePage> {
               } else if (state is HomeAddTaskButtonClickedActionState) {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => TodoPage()));
+              } else if (state is HomeLoginNavigatorActionState) {
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => LoginPage()),
+                    (route) => false);
               }
             },
             builder: (context, state) {

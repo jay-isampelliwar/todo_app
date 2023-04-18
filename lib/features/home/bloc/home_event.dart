@@ -27,3 +27,5 @@ class HomeTaskDeleteEvent extends HomeEvent {
 class HomeUserLoginEventEvent extends HomeEvent {}
 
 class HomeNewTaskAddEvent extends HomeEvent {}
+
+class HomeLogoutButtonClickedActionEvent extends HomeEvent {}

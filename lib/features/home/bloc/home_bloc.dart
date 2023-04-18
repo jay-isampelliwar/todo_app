@@ -26,6 +26,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<HomeAddTaskButtonClickedActionEvent>(
         homeAddTaskButtonClickedActionEvent);
     on<HomeUserLoginEventEvent>(homeUserLoginEventEvent);
+    on<HomeLogoutButtonClickedActionEvent>(homeLogoutButtonClickedActionEvent);
     // on<HomeUpdatePageEvent>(homeUpdatePageEvent);
   }
   FutureOr<void> homeInitialEvent(
@@ -87,5 +88,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     } else {
       emit(HomeErrorActionState(message: "Something went wrong"));
     }
+  }
+
+  FutureOr<void> homeLogoutButtonClickedActionEvent(
+      HomeLogoutButtonClickedActionEvent event, Emitter<HomeState> emit) {
+    hiveBox.clear();
+    emit(HomeLoginNavigatorActionState());
   }
 }

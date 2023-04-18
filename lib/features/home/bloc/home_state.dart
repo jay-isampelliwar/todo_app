@@ -40,3 +40,5 @@ class HomeTaskDoneButtonClickedState extends HomeState {}
 class HomeTaskUndoneButtonClickedState extends HomeState {}
 
 class HomeAddTaskButtonClickedActionState extends HomeActionState {}
+
+class HomeLoginNavigatorActionState extends HomeActionState {}
