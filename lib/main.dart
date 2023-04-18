@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:todo_app/features/auth/login/ui/login.dart';
 import 'package:todo_app/features/home/ui/home.dart';
-
-import 'features/auth/signup/ui/signup.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,6 +20,6 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(primarySwatch: Colors.grey),
         home: hiveBox.get("Email") != null && hiveBox.get("Password") != null
             ? const HomePage()
-            : const SignUpPage());
+            : LoginPage());
   }
 }
