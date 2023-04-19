@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -10,6 +12,7 @@ import 'package:todo_app/features/todo/ui/todo.dart';
 import '../../../core/constant/app_font_styles.dart';
 import '../../../core/wigets/app_snacbar.dart';
 import '../../auth/login/ui/login.dart';
+import '../bloc/widget/loading_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -21,7 +24,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final HomeBloc homeBloc = HomeBloc();
   final hiveBox = Hive.box("data_box");
-
   @override
   void initState() {
     if (hiveBox.get("Email") != null && hiveBox.get("Password") != null) {
@@ -84,7 +86,21 @@ class _HomePageState extends State<HomePage> {
             },
             builder: (context, state) {
               if (state is HomeLoadingState) {
-                return const SizedBox();
+                log("Loading");
+                return Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: size.width * 0.03,
+                  ),
+                  child: SizedBox(
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: 10,
+                      itemBuilder: (BuildContext context, int index) {
+                        return loadingWidget(size);
+                      },
+                    ),
+                  ),
+                );
               } else if (state is HomeLoadingSuccessState) {
                 final homeLoadingSuccessState = state;
                 return Column(

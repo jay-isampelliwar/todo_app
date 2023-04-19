@@ -74,6 +74,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   FutureOr<void> homeUserLoginEventEvent(
       HomeUserLoginEventEvent event, Emitter<HomeState> emit) async {
+    emit(HomeLoadingState());
     LoginDataModel loginDataModel = await _apiRepository.userLogin(
         hiveBox.get("Email"), hiveBox.get("Password"));
 
