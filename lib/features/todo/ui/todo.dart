@@ -6,7 +6,7 @@ import 'package:todo_app/core/constant/const_sizebox.dart';
 import 'package:todo_app/features/home/model/todo_data_model.dart';
 import 'package:todo_app/features/home/ui/home.dart';
 
-import '../../../core/wigets/app_snacbar.dart';
+import '../../../core/widgets/app_snacbar.dart';
 import '../bloc/todo_bloc.dart';
 
 class TodoPage extends StatefulWidget {
@@ -120,13 +120,16 @@ class _TodoPageState extends State<TodoPage> {
               constHightSizedBox(0.04, size.height),
               GestureDetector(
                 onTap: () {
-                  if (widget.todo == null) {
-                    todoBloc.add(TodoAddTaskButtonClickedActionEvent(
-                        title: todoTextEditingController.text));
-                  } else {
-                    todoBloc.add(TodoUpdateTaskButtonClickedActionEvent(
-                        title: todoTextEditingController.text,
-                        id: widget.todo!.datumId));
+                  FocusScope.of(context).unfocus();
+                  if (formKey.currentState!.validate()) {
+                    if (widget.todo == null) {
+                      todoBloc.add(TodoAddTaskButtonClickedActionEvent(
+                          title: todoTextEditingController.text));
+                    } else {
+                      todoBloc.add(TodoUpdateTaskButtonClickedActionEvent(
+                          title: todoTextEditingController.text,
+                          id: widget.todo!.datumId));
+                    }
                   }
                 },
                 child: Container(
