@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:todo_app/core/constant/app_font_styles.dart';
-import 'package:todo_app/core/wigets/app_snacbar.dart';
+import 'package:todo_app/core/widgets/app_snacbar.dart';
 import 'package:todo_app/features/auth/signup/ui/signup.dart';
 import 'package:todo_app/core/constant/app_colors.dart';
 import 'package:todo_app/core/helper/app_validator.dart';

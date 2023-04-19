@@ -8,7 +8,7 @@ import '../../../../core/constant/app_colors.dart';
 import '../../../../core/constant/const_sizebox.dart';
 import '../../../../core/constant/app_text_field.dart';
 import '../../../../core/helper/app_validator.dart';
-import '../../../../core/wigets/app_snacbar.dart';
+import '../../../../core/widgets/app_snacbar.dart';
 import '../../widgets/todo_label.dart';
 
 class SignUpPage extends StatefulWidget {

@@ -5,9 +5,9 @@ import 'package:todo_app/core/constant/app_font_styles.dart';
 import 'package:todo_app/core/constant/app_text_field.dart';
 import 'package:todo_app/core/constant/const_sizebox.dart';
 import 'package:todo_app/core/helper/app_validator.dart';
-import 'package:todo_app/core/wigets/app_snacbar.dart';
+import 'package:todo_app/core/widgets/app_snacbar.dart';
+import 'package:todo_app/features/auth/login/ui/login.dart';
 import 'package:todo_app/features/auth/otp/bloc/otp_bloc.dart';
-import 'package:todo_app/features/home/ui/home.dart';
 
 class OTPScreen extends StatelessWidget {
   String email;
@@ -44,10 +44,10 @@ class OTPScreen extends StatelessWidget {
                     color: Colors.green,
                   ));
 
-                  Navigator.pushReplacement(
+                  Navigator.pushAndRemoveUntil(
                       context,
-                      MaterialPageRoute(
-                          builder: (context) => const HomePage()));
+                      MaterialPageRoute(builder: (context) => LoginPage()),
+                      (route) => false);
                 }
               },
               builder: (context, state) {

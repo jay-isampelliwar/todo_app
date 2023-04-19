@@ -10,9 +10,9 @@ import 'package:todo_app/features/home/model/todo_data_model.dart';
 import 'package:todo_app/features/todo/ui/todo.dart';
 
 import '../../../core/constant/app_font_styles.dart';
-import '../../../core/wigets/app_snacbar.dart';
+import '../../../core/widgets/app_snacbar.dart';
 import '../../auth/login/ui/login.dart';
-import '../bloc/widget/loading_widget.dart';
+import '../widget/loading_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
